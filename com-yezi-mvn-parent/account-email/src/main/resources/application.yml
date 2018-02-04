@@ -1,0 +1,15 @@
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8890/eureka/
+spring:
+  application:
+    name: account-email
+  cloud:
+    config:
+      label: master
+      profile: dev
+      uri: http://localhost:8888/
+
+server:
+  port: 8881
