@@ -1,7 +1,9 @@
 package com.yezimvn.accountemail.service;
 
+import com.netflix.discovery.converters.Auto;
 import com.yezimvn.accountemail.exception.AccountEmailException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
@@ -16,15 +18,14 @@ import javax.mail.internet.MimeMessage;
 @Service
 public class AccountEmailServiceImpl implements AccounrEmailService {
     private JavaMailSender javaMailSender;
-    private String systenEmail;
+    private String systemEmail;
 
     @Override
     public void sendMail(String to, String subject, String content) throws AccountEmailException {
-
         try {
             MimeMessage msg = javaMailSender.createMimeMessage();
             MimeMessageHelper msgHelper = new MimeMessageHelper(msg);
-            msgHelper.setFrom(systenEmail);
+            msgHelper.setFrom(systemEmail);
             msgHelper.setTo(to);
             msgHelper.setSubject(subject);
             msgHelper.setText(content, true);
@@ -42,11 +43,11 @@ public class AccountEmailServiceImpl implements AccounrEmailService {
         this.javaMailSender = javaMailSender;
     }
 
-    public String getSystenEmail() {
-        return systenEmail;
+    public String getSystemEmail() {
+        return systemEmail;
     }
 
-    public void setSystenEmail(String systenEmail) {
-        this.systenEmail = systenEmail;
+    public void setSystemEmail(String systemEmail) {
+        this.systemEmail = systemEmail;
     }
 }

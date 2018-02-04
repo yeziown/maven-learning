@@ -3,6 +3,7 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemsLocation="http://wwww.springframework.org/schema/beans
        http://www.spring.springframework.org/schema/beans/spring-beans-2.5.xsd">
+
     <bean id="propertyConfigure" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
         <property name="locations">
             <list>
@@ -10,7 +11,7 @@
             </list>
         </property>
     </bean>
-    <bean id="javamailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+    <bean id="javaMailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
         <property name="protocol" value="${email.protocol}"/>
         <property name="host" value="${email.host}"/>
         <property name="port" value="${email.port}"/>
@@ -23,7 +24,9 @@
         </property>
     </bean>
     <bean id="accountEmailService" class="com.yezimvn.accountemail.service.AccountEmailServiceImpl">
-        <property name="javaMailSender" ref="javamailSender"/>
-        <property name="systenEmail" value="${email.systemEmail}}"/>
+        <property name="javaMailSender">
+            <ref bean="javaMailSender"/>
+        </property>
+        <property name="systemEmail" value="${email.systemEmail}}"/>
     </bean>
 </beans>
